@@ -31,8 +31,7 @@ will be displayed as "Latest" only after the VM(s) reboot or the "Nutanix Guest 
 Example Playbook
 ----------------
 
-- Create a vars/main.yml with the required variables (above) and a files/vm.tsv before
-using the following playbook.
+Create a **vars/main.yml** with the required variables (above) and a **files/vm.tsv** before using the following playbook.
 
     ---
     - name: Create VMs on Nutanix AHV

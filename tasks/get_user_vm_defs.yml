@@ -1,0 +1,22 @@
+---
+# Parse user-provided VM specifications and store them in a list of dictionaries,
+# with each VM's specifications stored in a dictionary.
+- name: Read user-provided VM specs from {{ vm_data_tsv }}
+  shell: /usr/bin/awk -F'~' '!/^#/ && !/^$/ && NR!=1 {print $0}' {{ vm_data_tsv }}
+  register: tsvout
+- name: Load VM specs from tsv into the list user_vm_defs 
+  set_fact:
+    user_vm_defs: "{{ user_vm_defs|default([]) + [ { \
+                     'vm_name' : item.split('~').0, \
+                     'vm_ip' : item.split('~').1, \
+                     'vm_subnet_name' : item.split('~').2, \
+                     'vm_image_name' : item.split('~').3, \
+                     'vm_num_sockets' : item.split('~').4, \
+                     'vm_memory' : item.split('~').5, \
+                     'vm_disk_list' : item.split('~').6} ] }}"
+  with_items: "{{ tsvout.stdout_lines }}"
+
+- name: Debug | User-provided VM Specifications
+  debug:
+    msg: "User-provided VM specifications: {{ user_vm_defs }}"
+  when: global_debug|bool

@@ -1,0 +1,37 @@
+# A base template for VM creation
+# 
+api_version: '3.0'
+metadata:
+  kind: vm
+spec:
+  cluster_reference:
+    kind: cluster
+    uuid: {{ cluster_uuid }}
+  name: {{ vm.vm_name }}
+  resources:
+    disk_list:
+    - data_source_reference:
+        kind: image
+        uuid: {{ vm.vm_image_uuid }}
+    - device_properties:
+        disk_address:
+          adapter_type: "IDE"
+          device_index: 0
+        device_type: "CDROM"
+{% if vm.vm_disk_list %}
+{% for disk in vm.vm_disk_list.split(',') %}
+    - device_properties:
+        device_type: "DISK"
+      disk_size_mib: {{ disk }}
+{% endfor %}
+{% endif %}
+    memory_size_mib: {{ vm.vm_memory }}
+    nic_list:
+    - ip_endpoint_list:
+      - ip: {{ vm.vm_ip }}
+      subnet_reference:
+        kind: subnet
+        uuid: {{ vm.vm_subnet_uuid }}
+    num_sockets: {{ vm.vm_num_sockets }}
+    num_vcpus_per_socket: 1 
+    power_state: 'ON'

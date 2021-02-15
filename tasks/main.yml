@@ -1,0 +1,26 @@
+---
+# Main tasks file
+##########################################
+# Parse user-provided VM(s) specifications
+- import_tasks: get_user_vm_defs.yml
+
+# Authenticate against Nutanix Prism Central/Element and store session cookies
+- import_tasks: get_session_cookie.yml
+
+# Obtain a list of Nutanix cluster names and UUIDs
+- import_tasks: list_cluster_uuids.yml
+
+# Obtain a list of image names and UUIDs
+- import_tasks: list_image_uuids.yml
+
+# Obtain a list of network/subnet names and UUIDs
+- import_tasks: list_subnet_uuids.yml
+
+# Update VM specifications with Nutanix UUIDs
+- import_tasks: update_vm_defs.yml 
+
+# Create VM(s)
+- import_tasks: create_vm.yml
+
+# Update Nutanix Guest Tools on VM(s)
+- import_tasks: update_ngt.yml

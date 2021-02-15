@@ -1,5 +1,5 @@
-Ansible Role Name - cg_nutanix_vm_create
-========================================
+Ansible Role Name - cybergavin.nutanix_vm_create
+================================================
 
 This ansible role enables the creation of one or more VMs on a single Nutanix cluster.
 
@@ -31,7 +31,7 @@ will be displayed as "Latest" only after the VM(s) reboot or the "Nutanix Guest 
 Example Playbook
 ----------------
 
-Create a vars/main.yml with the required variables (above) and a files/vm.tsv before
+- Create a vars/main.yml with the required variables (above) and a files/vm.tsv before
 using the following playbook.
 
     ---
@@ -41,9 +41,9 @@ using the following playbook.
       tasks:
         - name: Include variables
           include_vars: dir=vars
-        - name: Use ansible role cg_nutanix_vm_create
+        - name: Use ansible role cybergavin.nutanix_vm_create
           include_role:
-            name: cg_nutanix_vm_create
+            name: cybergavin.nutanix_vm_create
 
 
 License
@@ -61,5 +61,5 @@ Cybergavin - https://cybergav.in - https://github.com/cybergav.in
 References
 -----------
 
-Influenced/Inspired by the Ansible role mbach04.nutanix_vm_provisioner at https://github.com/mbach04/nutanix_vm_provisioner.
-The ansible role mbach04.nutanix_vm_provisioner is licensed using the MIT License with Copyright (c) 2018 Red Hat.
+- Influenced/Inspired by the Ansible role mbach04.nutanix_vm_provisioner at https://github.com/mbach04/nutanix_vm_provisioner.
+- The ansible role mbach04.nutanix_vm_provisioner is licensed using the MIT License with Copyright (c) 2018 Red Hat.

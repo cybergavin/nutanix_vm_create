@@ -28,8 +28,9 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-    - name: GenericLinux
-        versions: all
+  - name: GenericLinux
+    versions: 
+    - all
   
 
 

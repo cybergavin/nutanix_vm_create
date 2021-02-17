@@ -1,4 +1,5 @@
 ---
+# Minor changes to original code provided by the mbach04.nutanix_vm_provisioner ansible role.
 # Calls Prism Central to obtain a list of networks/subnets
 # Returns a list of dictionaries containing the name and uuid of the subnets 
 # Example output:

@@ -1,5 +1,5 @@
 ---
-# defaults file for cg_nutanix_vm_create
+# defaults file for cybergavin.nutanix_vm_create
 # These variables must be defined with their appropriate values in a 
 # variables filed used by the calling playbook.
 #
@@ -14,7 +14,7 @@ pc_api_url: "https://{{ pc_cluster_fqdn }}:9440/api/nutanix/v3"
 pe_api_url: "https://{{ pe_cluster_fqdn }}:9440/PrismGateway/services/rest/v1"
 
 # User-provided VM specifications
-vm_data_tsv: "files/vm.tsv"                   # Relative path and name of the tilde-separated-values file containing details of the VMs to be deployed
+vm_data_csv: "files/vm.csv"                   # Relative path and name of the comma-separated-values file containing details of the VMs to be deployed
 
 # Debug 
 global_debug: false                           # Global Debug flag

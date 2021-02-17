@@ -6,7 +6,7 @@ This ansible role enables the creation of one or more VMs on a single Nutanix cl
 Requirements
 ------------
 
-- A user-provided tilde-separated-values file containing the specifications of one or more VMs. Refer the sample files/vm.tsv in the role dircetory.
+- A user-provided comma-separated-values file containing the specifications of one or more VMs. Refer the sample files/vm.csv in the role dircetory.
 - A user-provided variables file containing appropriate values for required variables. Refer the defaults/main.yml in the role directory.
 
 Role Variables
@@ -17,7 +17,7 @@ Role Variables
 - prism_user        # An account with permissions to provision on the cluster
 - prism_password    # The account's password. Do NOT store this in the clear. Use ansible vault or an external vault. 
 - cluster_name      # Name of the nutanix cluster on which VMs will be created 
-- vm_data_tsv       # Relative path and name of the tilde-separated-values file containing details of the VMs to be deployed
+- vm_data_csv       # Relative path and name of the comma-separated-values file containing details of the VMs to be deployed
 - global_debug      # Global Debug flag
 
 
@@ -31,7 +31,7 @@ will be displayed as "Latest" only after the VM(s) reboot or the "Nutanix Guest 
 Example Playbook
 ----------------
 
-Create a **vars/main.yml** with the required variables (above) and a **files/vm.tsv** before using the following playbook.
+Create a **vars/main.yml** with the required variables (above) and a **files/vm.csv** before using the following playbook.
 
     ---
     - name: Create VMs on Nutanix AHV

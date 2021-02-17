@@ -19,7 +19,7 @@ spec:
           device_index: 0
         device_type: "CDROM"
 {% if vm.vm_disk_list %}
-{% for disk in vm.vm_disk_list.split(',') %}
+{% for disk in vm.vm_disk_list.split('-') %}
     - device_properties:
         device_type: "DISK"
       disk_size_mib: {{ disk }}

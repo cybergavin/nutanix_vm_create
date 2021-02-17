@@ -1,7 +1,7 @@
-# This is a sample data file that is to be used along with the cg_nutanix_vm_create
+# This is a sample data file that is to be used along with the cybergavin.nutanix_vm_create
 # ansible role for provisioning VMs on a Nutanix cluster. Such a file should be created
 # with the proper values and called by your main playbook.
-# This is a tilde-separated-values file containing the list of VMs to be created.
+# This is a comma-separated-values file containing the list of VMs to be created.
 # In the example below:
 #  vm_name       => VM's Name
 #  ip            => VM's IP address
@@ -9,15 +9,15 @@
 #  image_name    => Name of the disk image used to create the VM
 #  num_vcpu      => Number of vCPU sockets for the VM
 #  memory_mib    => VM's memory size in MiB
-#  disk_list_mib => Additional VM disk sizes in MiB (comma-separated)
+#  disk_list_mib => Additional VM disk sizes in MiB (hyphen-separated)
 #
 #  NOTE: All attributes are mandatory, except disk_list_mib. If you do not wish
-#  to add disks to the VM, keep the placeholder empty (~~)
+#  to add disks to the VM, keep the placeholder empty (,,)
 
 # Example 1: A VM with 2 vCPUs/4 GB RAM and 2 added disks
-vm_name~ip~subnet_name~image_name~num_vcpu~memory_mib~disk_list_mib
-testvm~10.1.1.10~webnet~rhel8-image~2~4096~10240,20480
+vm_name,ip,subnet_name,image_name,num_vcpu,memory_mib,disk_list_mib
+testvm,10.1.1.10,webnet,rhel8-image,2,4096,10240-20480
 
 # Example 2: A VM with 2 vCPUs/4 GB RAM and no added disks
-vm_name~ip~subnet_name~image_name~num_vcpu~memory_mib~disk_list_mib
-testvm~10.1.1.10~webnet~rhel8-image~2~4096~~
+vm_name,ip,subnet_name,image_name,num_vcpu,memory_mib,disk_list_mib
+testvm,10.1.1.10,webnet,rhel8-image,2,4096,,

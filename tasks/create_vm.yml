@@ -1,5 +1,6 @@
 ---
 # Create VM(s) on Nutanix
+# Minor changes to original code provided by the mbach04.nutanix_vm_provisioner ansible role.
 
 - name: Store VM template contents
   set_fact: 
@@ -40,7 +41,7 @@
   set_fact:
     vm_uuids: "{{ vm_uuids|default([]) + [ item.json.metadata.uuid  ] }}"
   with_items: "{{ json_create_result.results }}"
-  
+
 - name: Debug | Print VM(s) UUID(s)
   debug:
     msg: "Created VM(s) UUID(s) : {{ vm_uuids }}"

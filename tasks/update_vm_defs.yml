@@ -30,3 +30,4 @@
 - name: Debug | Print final user VM(s) specifications for creation
   debug:
     msg: "VM(s) shall be created as per: {{ ntx_vm_defs }}"
+  when: global_debug|bool

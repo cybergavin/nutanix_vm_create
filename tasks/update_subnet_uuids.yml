@@ -2,6 +2,6 @@
 # Update VM specifications with subnet UUIDs
 - name: Update VM specifications with subnet UUIDs
   set_fact:
-    vm_defs_1: "{{ vm_defs_1 |default([])  + [my_vm | combine({ 'vm_subnet_uuid' : item. uuid  })] }}"
-  when: my_vm.vm_subnet_name == item.name
+    vm_defs_1: "{{ vm_defs_1 |default([])  + [my_vm | combine({ 'subnet_uuid' : item. uuid  })] }}"
+  when: my_vm.subnet_name == item.name
   with_items: "{{ subnet_uuids }}"

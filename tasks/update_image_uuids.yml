@@ -2,6 +2,6 @@
 # Update VM specifications with image UUIDs
 - name: Update VM specifications with image UUIDs 
   set_fact:
-    vm_defs_2: "{{ vm_defs_2 |default([])  + [my_vm | combine({ 'vm_image_uuid' : item. uuid  })] }}"
-  when: my_vm.vm_image_name == item.name
+    vm_defs_2: "{{ vm_defs_2 |default([])  + [my_vm | combine({ 'image_uuid' : item. uuid  })] }}"
+  when: my_vm.image_name == item.name
   with_items: "{{ image_uuids }}"

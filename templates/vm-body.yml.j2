@@ -12,26 +12,28 @@ spec:
     disk_list:
     - data_source_reference:
         kind: image
-        uuid: {{ vm.vm_image_uuid }}
+        uuid: {{ vm.image_uuid }}
     - device_properties:
         disk_address:
           adapter_type: "IDE"
           device_index: 0
         device_type: "CDROM"
-{% if vm.vm_disk_list %}
-{% for disk in vm.vm_disk_list.split('-') %}
+{% if vm.disk_list_mib %}
+{% for disk in vm.disk_list_mib.split('-') %}
     - device_properties:
         device_type: "DISK"
       disk_size_mib: {{ disk }}
 {% endfor %}
 {% endif %}
-    memory_size_mib: {{ vm.vm_memory }}
+    memory_size_mib: {{ vm.memory_mib }}
+    boot_config:
+      boot_type: "UEFI"
     nic_list:
     - ip_endpoint_list:
-      - ip: {{ vm.vm_ip }}
+      - ip: {{ vm.ip }}
       subnet_reference:
         kind: subnet
-        uuid: {{ vm.vm_subnet_uuid }}
-    num_sockets: {{ vm.vm_num_sockets }}
+        uuid: {{ vm.subnet_uuid }}
+    num_sockets: {{ vm.num_vcpu }}
     num_vcpus_per_socket: 1 
     power_state: 'ON'

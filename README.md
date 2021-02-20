@@ -72,9 +72,9 @@ Example usage after installation of the ansible role
       tasks:
         - name: Include variables
           include_vars: dir=vars
-        - name: Use ansible role nutanix_vm_create
+        - name: Use ansible role cybergavin.nutanix_vm_create
           include_role:
-            name: nutanix_vm_create
+            name: cybergavin.nutanix_vm_create
 
 **NOTE:** In the above example playbook, **vars_prompt** is used to prompt the user for Prism credentials. If you opt to
 use a vault for these credentials or accept them via other means, ensure that they are stored in the **prism_user** and **prism_password** variables.

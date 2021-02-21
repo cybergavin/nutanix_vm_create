@@ -1,5 +1,8 @@
 ---
 vm_data_csv: "files/vm.csv"
+inventory: "files/inventory"
 global_debug: false
+enable_ngt: false
+boot_type: "UEFI"
 pc_api_url: "https://{{ pc_cluster_fqdn }}:9440/api/nutanix/v3"
 pe_api_url: "https://{{ pe_cluster_fqdn }}:9440/PrismGateway/services/rest/v1"

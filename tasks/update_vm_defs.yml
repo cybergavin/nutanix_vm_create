@@ -2,30 +2,34 @@
 # Update Cluster and VM(s) specifications with UUIDs for creation
 - name: Define Cluster UUID to use from name
   set_fact:
-    cluster_uuid: "{{ item['uuid'] }}"
-  when: "item['name'] == cluster_name"
+    cluster_uuid: "{{ item.uuid }}"
+  when: "item.name == cluster_name"
   loop: "{{ cluster_uuids }}"
 
 - name: Update VM(s) specifications with subnet UUIDs 
-  include: update_subnet_uuids.yml
-  loop: "{{ user_vm_defs }}"
-  loop_control:
-    loop_var: my_vm
-
+  set_fact:
+    uvm_defs_ext1: "{{ uvm_defs_ext1 | default([]) + [item.1 | combine({ 'subnet_uuid' : item.0.uuid  })] }}"
+  when: item.1.subnet_name == item.0.name 
+  with_nested:
+    - "{{ subnet_uuids }}"
+    - "{{ user_vm_defs }}"
+  
 - name: Debug | Print updated VM(s) specifications with subnet UUIDs
   debug:
-    msg: "Updated VM specifications with subnet UUIDs : {{ vm_defs_1 }}"
+    msg: "Updated VM specifications with subnet UUIDs : {{ uvm_defs_ext1 }}"
   when: global_debug|bool
 
 - name: Update VM specifications with image UUIDs 
-  include: update_image_uuids.yml
-  loop: "{{ vm_defs_1 }}"
-  loop_control:
-    loop_var: my_vm
+  set_fact:
+    uvm_defs_ext2: "{{ uvm_defs_ext2 | default([]) + [item.1 | combine({ 'image_uuid' : item.0.uuid  })] }}"
+  when: item.1.image_name == item.0.name 
+  with_nested:
+    - "{{ image_uuids }}"
+    - "{{ uvm_defs_ext1 }}"
 
 - name: Store updated VM(s) specifications
   set_fact:
-    ntx_vm_defs: "{{ vm_defs_2 }}"
+    ntx_vm_defs: "{{ uvm_defs_ext2 }}"
 
 - name: Debug | Print final user VM(s) specifications for creation
   debug:

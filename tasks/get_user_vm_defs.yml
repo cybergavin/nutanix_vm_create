@@ -2,6 +2,12 @@
 # Parse the user-provided VM specifications and store them in a list of dictionaries,
 # with each VM's specifications stored in a dictionary.
 #
+- name: Check existence of {{ vm_data_csv }}
+  stat:
+    path: "{{ vm_data_csv }}"
+  register: data_exists
+  failed_when: not data_exists.stat.exists
+
 - name: Read user-provided VM specifications from {{ vm_data_csv }}
   read_csv:
     path: "{{ vm_data_csv }}" 
@@ -9,7 +15,7 @@
 
 - name: Register user-provided VM specifications
   set_fact:
-    user_vm_defs: "{{ vm_defs['list'] }}"
+    user_vm_defs: "{{ vm_defs.list }}"
 
 - name: Debug | User-provided VM specifications
   debug:

@@ -27,7 +27,7 @@ spec:
 {% endif %}
     memory_size_mib: {{ vm.memory_mib }}
     boot_config:
-      boot_type: "UEFI"
+      boot_type: "{{ boot_type }}"
     nic_list:
     - ip_endpoint_list:
       - ip: {{ vm.ip }}

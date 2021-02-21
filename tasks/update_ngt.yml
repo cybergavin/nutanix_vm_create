@@ -18,7 +18,6 @@
     headers: 
       Cookie: "{{ pe_session_cookie }}"
   register: json_mount_ngt_result
-  ignore_errors: yes
   with_items: "{{ vm_uuids }}"
 
 - name: Debug | Mount NGT 
@@ -38,7 +37,6 @@
     headers: 
       Cookie: "{{ pe_session_cookie }}"
   register: json_enable_ngt_result
-  ignore_errors: yes
   with_items: "{{ vm_uuids }}"
 
 - name: Debug | Enable NGT 

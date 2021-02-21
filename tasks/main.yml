@@ -24,3 +24,7 @@
 
 # Update Nutanix Guest Tools on VM(s)
 - import_tasks: update_ngt.yml
+  when: enable_ngt|bool
+
+# Create Inventory file
+- import_tasks: create_inventory.yml

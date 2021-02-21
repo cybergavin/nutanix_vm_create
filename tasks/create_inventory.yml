@@ -1,0 +1,12 @@
+---
+# Create an inventory file containing a list of the VMs just created.
+- name: Create inventory file {{ inventory }}
+  copy:
+    dest: "{{ inventory }}"
+    content: "[nutanix_vm_create]"
+
+- name: ADD VM IP addresses to inventory file {{ inventory }}
+  lineinfile:
+    path: "{{ inventory }}"
+    line: "{{ item.ip }}"
+  with_items: "{{ ntx_vm_defs }}"

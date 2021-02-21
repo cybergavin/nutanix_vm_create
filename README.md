@@ -8,11 +8,12 @@ Features
 
 - Allows provisioning of VMs from different disk images
 - Allows provisioning of VMs in different subnets
-- Mounts and enables Nutanix Guest Tools on the VMs after provisioning. Works for **AHV Clusters** only.
+- Generates an inventory file with the IP addresses of the VMs that were created, for subsequent use by other playbooks
+- If enabled, mounts and enables Nutanix Guest Tools on the VMs after provisioning. Works for **AHV Clusters** only
 
   *NOTE:* The Nutanix Guest Agent must be present in the disk image and the Nutanix Guest Agent service on the VM must be restarted after provisioning.
 
-- Creates VMs with **UEFI** boot config
+- Creates VMs with **UEFI** boot config by default. This may be overriden globally in the vars/main.yml variables file.
 
 Requirements
 ------------
@@ -27,7 +28,9 @@ Role Variables
 - pe_cluster_fqdn   # FQDN/IP for Prism Element
 - cluster_name      # Name of the nutanix cluster on which VMs will be created 
 - vm_data_csv       # Relative path and name of the comma-separated-values file containing details of the VMs to be deployed
-- global_debug      # Global Debug flag
+- global_debug      # Global Debug flag (boolean)
+- enable_ngt        # Enable Nutanix Guest Tools? (boolean)
+- boot_type         # Boot Type for all VMs - "UEFI" (default), "LEGACY" or "SECURE_BOOT"
 
 
 Dependencies
@@ -72,9 +75,9 @@ Example usage after installation of the ansible role
       tasks:
         - name: Include variables
           include_vars: dir=vars
-        - name: Use ansible role cybergavin.nutanix_vm_create
+        - name: Use ansible role nutanix_vm_create
           include_role:
-            name: cybergavin.nutanix_vm_create
+            name: nutanix_vm_create
 
 **NOTE:** In the above example playbook, **vars_prompt** is used to prompt the user for Prism credentials. If you opt to
 use a vault for these credentials or accept them via other means, ensure that they are stored in the **prism_user** and **prism_password** variables.
@@ -83,6 +86,10 @@ use a vault for these credentials or accept them via other means, ensure that th
 *STEP 4:* Execute the playbook as per the following example:
 
     ansible-playbook main.yml
+
+**NOTE:**
+- An inventory file **files/inventory** will be generated containing the IP addresses of the VMs that were created
+- If you wish to enable NGT, you may also set "enable_ngt: true" in **vars/main.yml**
 
 
 License

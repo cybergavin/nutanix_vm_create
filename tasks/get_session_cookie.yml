@@ -1,5 +1,6 @@
 ---
-# Authenticate with Prism Central and Prism Element and store session cookies.
+# Authenticate with Prism Central and and store session cookies.
+# Minor changes to original code provided by the mbach04.nutanix_vm_provisioner ansible role.
 - name: Authenticate to Prism Central 
   uri:
     url: "{{ pc_api_url }}/clusters/list"
@@ -27,26 +28,4 @@
 - name: Debug | Print session cookie for Prism Central
   debug:
     msg: "Session cookie for Prism Central is {{ pc_session_cookie }}"
-  when: global_debug|bool
-
-- name: Authenticate to Prism Element 
-  uri:
-    url: "{{ pe_api_url }}/clusters"
-    method: GET 
-    validate_certs: no
-    force_basic_auth: yes
-    user: "{{ prism_user }}"
-    password: "{{ prism_password }}"
-    status_code: 200
-    return_content: yes
-  register: pe_login
-  ignore_errors: yes
-
-- name: Store session cookie for Prism Element
-  set_fact:
-    pe_session_cookie: "{{ pe_login.set_cookie }}"
-
-- name: Debug | Print session cookie for Prism Element
-  debug:
-    msg: "Session cookie for Prism Element is {{ pe_session_cookie }}"
   when: global_debug|bool

@@ -1,6 +1,6 @@
 # A base template for VM creation
 # 
-api_version: '3.0'
+api_version: '3.1.0'
 metadata:
   kind: vm
 spec:
@@ -37,3 +37,9 @@ spec:
     num_sockets: {{ vm.num_vcpu }}
     num_vcpus_per_socket: 1 
     power_state: 'ON'
+{% if enable_ngt %}
+    guest_tools:
+      nutanix_guest_tools:
+        state: "ENABLED"
+        iso_mount_state: "MOUNTED"
+{% endif %}

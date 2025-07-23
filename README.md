@@ -101,16 +101,11 @@ use a vault for these credentials or accept them via other means, ensure that th
 - If you wish to enable NGT, you may also set "enable_ngt: true" in **vars/main.yml**
 
 
-License
--------
-
-GPLv3.0
-
 
 Author Information
 ------------------
 
-Cybergavin - https://cybergav.in - https://github.com/cybergav.in
+Cybergavin - https://cybergav.in - https://github.com/cybergavin
 
 
 References
